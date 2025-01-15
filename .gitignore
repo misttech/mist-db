@@ -1,0 +1,16 @@
+### General file patterns
+.DS_Store
+.vscode
+.zig-cache/
+Thumbs.db
+tmp/
+zig-cache/
+zig-out/
+
+### Top-level directories
+# For storing local scripts and data files in a source tree.
+/local/
+/prebuilt/
+
+# Third party repos.
+/third_party/*
