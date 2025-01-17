@@ -13,5 +13,42 @@
 // limitations under the License.
 
 const std = @import("std");
+const builtin = @import("builtin");
+const Allocator = std.mem.Allocator;
 
-pub fn main() !void {}
+const mist_db = @import("mist-db");
+
+const Editor = @import("zigline").Editor;
+
+const repl_preamble = std.fmt.comptimePrint(
+    \\mist-db {[mist_db]} [Zig {[zig]}] on {[os]s}
+    \\Enter ".help" for usage hints.
+    \\Use {[eof]s} to exit.
+    \\
+, .{
+    .mist_db = mist_db.version,
+    .zig = builtin.zig_version,
+    .os = @tagName(builtin.os.tag),
+    .eof = if (builtin.os.tag == .windows) "Ctrl+Z followed by Enter" else "Ctrl+D",
+});
+
+pub fn main() !void {
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    defer _ = gpa.deinit();
+    const allocator = gpa.allocator();
+
+    const stdout = std.io.getStdOut().writer();
+
+    try stdout.writeAll(repl_preamble);
+
+    var editor = Editor.init(allocator, .{});
+    defer editor.deinit();
+
+    while (true) {
+        const source_text = editor.getLine("mist-db> ") catch |err| switch (err) {
+            error.Eof => break,
+            else => return err,
+        };
+        defer allocator.free(source_text);
+    }
+}
