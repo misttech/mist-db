@@ -1,0 +1,17 @@
+.{
+    .name = "mist-db",
+    .version = "0.0.0",
+    .dependencies = .{
+        .mist_db = .{
+            .path = "src/mist-db",
+        },
+    },
+
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "LICENSE",
+        "README.md",
+    },
+}
