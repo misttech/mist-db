@@ -1,9 +1,24 @@
+// Copyright 2025 Mist Tecnologia LTDA
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 .{
     .name = "mist-db",
     .version = "0.0.0",
     .dependencies = .{
-        .mist_db = .{
-            .path = "src/mist-db",
+        .zigline = .{
+            .url = "https://github.com/alimpfard/zigline/archive/143afe33f43a433b829fb4619039d21ed2345d9a.tar.gz",
+            .hash = "1220f323c3f027438a8dd69c113d3eebb88e6b13c779243ad15eaf7d4105eb45ea03",
         },
     },
 
@@ -11,6 +26,7 @@
         "build.zig",
         "build.zig.zon",
         "src",
+        "AUTHORS",
         "LICENSE",
         "README.md",
     },
